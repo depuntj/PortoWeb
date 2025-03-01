@@ -6,11 +6,10 @@ import Waves from "@/components/Animation/Waves";
 export default function HeroSection() {
   return (
     <section className="relative pt-24 pb-12 md:pt-36 md:pb-24 overflow-hidden min-h-[90vh] flex items-center">
-      {/* Enhanced Interactive Waves Background */}
       <div className="absolute inset-0 z-0">
         <Waves
-          lineColor="rgba(255, 255, 255, 0.6)" // Increased opacity for more visible lines
-          backgroundColor="rgba(0, 0, 0, 0.85)" // Darker background for better contrast
+          lineColor="rgba(255, 255, 255, 0.6)"
+          backgroundColor="rgba(0, 0, 0, 0.85)"
           waveSpeedX={0.02}
           waveSpeedY={0.01}
           waveAmpX={40}
@@ -23,13 +22,11 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Subtle gradient overlay to improve text readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent z-1"></div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="flex-1 space-y-6">
-            {/* Enhanced text visibility with text shadow and larger font */}
             <h1 className="text-5xl sm:text-6xl font-bold tracking-tight drop-shadow-lg">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-violet-500 leading-tight text-shadow-sm">
                 Hello, I&apos;m
@@ -65,24 +62,19 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Enhanced profile circle with border glow effect */}
           <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex-shrink-0">
-            {/* Outer glow effect */}
             <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 opacity-30 blur-md"></div>
 
-            {/* Main circle with border */}
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
               <div className="h-full w-full bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center text-white text-6xl font-bold">
                 DP
               </div>
             </div>
 
-            {/* Pulsing effect */}
             <div className="absolute -inset-4 rounded-full border-2 border-blue-500/30 animate-pulse"></div>
           </div>
         </div>
 
-        {/* Enhanced Social Links with better visibility */}
         <div className="flex gap-6 mt-12 justify-center md:justify-start">
           <a
             href="mailto:danan12453@gmail.com"
@@ -161,7 +153,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Add custom styles to support text shadows */}
       <style jsx global>{`
         .text-shadow-sm {
           text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);

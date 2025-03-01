@@ -273,7 +273,6 @@ const Waves: React.FC<WavesProps> = ({
       canvas.width = rect.width;
       canvas.height = rect.height;
 
-      // Create gradient if enabled
       if (configRef.current.useGradient && ctxRef.current) {
         const gradient = ctxRef.current.createLinearGradient(
           0,
@@ -380,23 +379,19 @@ const Waves: React.FC<WavesProps> = ({
 
       ctx.clearRect(0, 0, width, height);
 
-      // Set line properties
       ctx.lineWidth = config.lineWidth;
 
-      // Add shadow for more visual impact
       ctx.shadowColor = config.lineColor;
       ctx.shadowBlur = 8;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 
-      // Set the color/gradient
       if (config.useGradient && gradientRef.current) {
         ctx.strokeStyle = gradientRef.current;
       } else {
         ctx.strokeStyle = config.lineColor;
       }
 
-      // Draw vertical lines (modified for better visibility)
       linesRef.current.forEach((points) => {
         ctx.beginPath();
         let p1 = moved(points[0], false);
@@ -425,7 +420,6 @@ const Waves: React.FC<WavesProps> = ({
       mouse.ly = mouse.y;
       mouse.a = Math.atan2(dy, dx);
 
-      // Update cursor position CSS variables
       container.style.setProperty("--x", `${mouse.sx}px`);
       container.style.setProperty("--y", `${mouse.sy}px`);
 
