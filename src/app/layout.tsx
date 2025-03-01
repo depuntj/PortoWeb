@@ -1,23 +1,22 @@
-// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
   subsets: ["latin"],
+  variable: "--font-geist-sans",
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
-  title: "John Doe | Full-Stack Developer",
+  title: "Dyan Dananjaya | Full-Stack Developer",
   description:
-    "Personal website and portfolio for John Doe, a full-stack developer specializing in React and Node.js",
+    "Personal website and portfolio for Dyan Dananjaya, a full-stack developer specializing in JavaScript, Kotlin, and Node.js",
 };
 
 export default function RootLayout({
@@ -31,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <NavBar />
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   );

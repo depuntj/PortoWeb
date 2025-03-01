@@ -75,6 +75,7 @@ export default function NavBar() {
             type="button"
             className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-foreground/70 hover:bg-foreground/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Open main menu"
           >
             <span className="sr-only">Open main menu</span>
             {!isMobileMenuOpen ? (

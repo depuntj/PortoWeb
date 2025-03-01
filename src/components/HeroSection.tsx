@@ -1,9 +1,27 @@
 import Link from "next/link";
+import Waves from "@/components/Animation/Waves";
 
 export default function HeroSection() {
   return (
-    <section className="pt-24 pb-12 md:pt-36 md:pb-24">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative pt-24 pb-12 md:pt-36 md:pb-24 overflow-hidden">
+      {/* Interactive Waves Background */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-blue-600/5 to-violet-600/5">
+        <Waves
+          lineColor="#fff"
+          backgroundColor="rgba(255, 255, 255, 0.02)"
+          waveSpeedX={0.02}
+          waveSpeedY={0.01}
+          waveAmpX={40}
+          waveAmpY={20}
+          friction={0.9}
+          tension={0.01}
+          maxCursorMove={120}
+          xGap={12}
+          yGap={36}
+        />
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex-1 space-y-6">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
@@ -20,7 +38,7 @@ export default function HeroSection() {
               Innovative developer with a proven track record of enhancing user
               experiences through strategic development and analytics.
             </p>
-            <div className="flex gap-4 pt-4">
+            <div className="flex flex-wrap gap-4 pt-4">
               <Link
                 href="/projects"
                 className="bg-foreground text-background px-5 py-3 rounded-full font-medium hover:opacity-90 transition"
@@ -29,7 +47,7 @@ export default function HeroSection() {
               </Link>
               <Link
                 href="/contact"
-                className="border border-foreground/20 px-5 py-3 rounded-full font-medium hover:bg-foreground/5 transition"
+                className="border border-foreground/20 backdrop-blur-sm bg-background/10 px-5 py-3 rounded-full font-medium hover:bg-foreground/5 transition"
               >
                 Contact Me
               </Link>
