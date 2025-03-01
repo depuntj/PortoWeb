@@ -127,6 +127,10 @@ interface Config {
   maxCursorMove: number;
   xGap: number;
   yGap: number;
+  lineWidth: number;
+  useGradient: boolean;
+  gradientColors: string[];
+  showCursor: boolean;
 }
 
 interface WavesProps {
@@ -141,22 +145,30 @@ interface WavesProps {
   friction?: number;
   tension?: number;
   maxCursorMove?: number;
+  lineWidth?: number;
+  useGradient?: boolean;
+  gradientColors?: string[];
+  showCursor?: boolean;
   style?: CSSProperties;
   className?: string;
 }
 
 const Waves: React.FC<WavesProps> = ({
-  lineColor = "black",
-  backgroundColor = "transparent",
+  lineColor = "rgba(255, 255, 255, 0.8)",
+  backgroundColor = "rgba(0, 0, 0, 0.9)",
   waveSpeedX = 0.0125,
   waveSpeedY = 0.005,
   waveAmpX = 32,
   waveAmpY = 16,
-  xGap = 10,
+  xGap = 24,
   yGap = 32,
   friction = 0.925,
   tension = 0.005,
   maxCursorMove = 100,
+  lineWidth = 1.5,
+  useGradient = true,
+  gradientColors = ["#3b82f6", "#8b5cf6"],
+  showCursor = true,
   style = {},
   className = "",
 }) => {
@@ -200,9 +212,14 @@ const Waves: React.FC<WavesProps> = ({
     maxCursorMove,
     xGap,
     yGap,
+    lineWidth,
+    useGradient,
+    gradientColors,
+    showCursor,
   });
 
   const frameIdRef = useRef<number | null>(null);
+  const gradientRef = useRef<CanvasGradient | null>(null);
 
   useEffect(() => {
     configRef.current = {
@@ -216,6 +233,10 @@ const Waves: React.FC<WavesProps> = ({
       maxCursorMove,
       xGap,
       yGap,
+      lineWidth,
+      useGradient,
+      gradientColors,
+      showCursor,
     };
   }, [
     lineColor,
@@ -228,6 +249,10 @@ const Waves: React.FC<WavesProps> = ({
     maxCursorMove,
     xGap,
     yGap,
+    lineWidth,
+    useGradient,
+    gradientColors,
+    showCursor,
   ]);
 
   useEffect(() => {
@@ -247,6 +272,21 @@ const Waves: React.FC<WavesProps> = ({
       };
       canvas.width = rect.width;
       canvas.height = rect.height;
+
+      // Create gradient if enabled
+      if (configRef.current.useGradient && ctxRef.current) {
+        const gradient = ctxRef.current.createLinearGradient(
+          0,
+          0,
+          rect.width,
+          rect.height
+        );
+        const colors = configRef.current.gradientColors;
+        colors.forEach((color, index) => {
+          gradient.addColorStop(index / (colors.length - 1), color);
+        });
+        gradientRef.current = gradient;
+      }
     }
 
     function setLines() {
@@ -334,25 +374,40 @@ const Waves: React.FC<WavesProps> = ({
     function drawLines() {
       const { width, height } = boundingRef.current;
       const ctx = ctxRef.current;
+      const config = configRef.current;
+
       if (!ctx) return;
+
       ctx.clearRect(0, 0, width, height);
-      ctx.beginPath();
-      ctx.strokeStyle = configRef.current.lineColor;
+
+      // Set line properties
+      ctx.lineWidth = config.lineWidth;
+
+      // Add shadow for more visual impact
+      ctx.shadowColor = config.lineColor;
+      ctx.shadowBlur = 8;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+
+      // Set the color/gradient
+      if (config.useGradient && gradientRef.current) {
+        ctx.strokeStyle = gradientRef.current;
+      } else {
+        ctx.strokeStyle = config.lineColor;
+      }
+
+      // Draw vertical lines (modified for better visibility)
       linesRef.current.forEach((points) => {
+        ctx.beginPath();
         let p1 = moved(points[0], false);
         ctx.moveTo(p1.x, p1.y);
         points.forEach((p, idx) => {
           const isLast = idx === points.length - 1;
           p1 = moved(p, !isLast);
-          const p2 = moved(
-            points[idx + 1] || points[points.length - 1],
-            !isLast
-          );
           ctx.lineTo(p1.x, p1.y);
-          if (isLast) ctx.moveTo(p2.x, p2.y);
         });
+        ctx.stroke();
       });
-      ctx.stroke();
     }
 
     function tick(t: number) {
@@ -369,6 +424,8 @@ const Waves: React.FC<WavesProps> = ({
       mouse.lx = mouse.x;
       mouse.ly = mouse.y;
       mouse.a = Math.atan2(dy, dx);
+
+      // Update cursor position CSS variables
       container.style.setProperty("--x", `${mouse.sx}px`);
       container.style.setProperty("--y", `${mouse.sy}px`);
 
@@ -381,13 +438,16 @@ const Waves: React.FC<WavesProps> = ({
       setSize();
       setLines();
     }
+
     function onMouseMove(e: MouseEvent) {
       updateMouse(e.pageX, e.pageY);
     }
+
     function onTouchMove(e: TouchEvent) {
       const touch = e.touches[0];
       updateMouse(touch.clientX, touch.clientY);
     }
+
     function updateMouse(x: number, y: number) {
       const mouse = mouseRef.current;
       const b = boundingRef.current;
@@ -428,17 +488,18 @@ const Waves: React.FC<WavesProps> = ({
       }}
       className={`absolute top-0 left-0 w-full h-full overflow-hidden ${className}`}
     >
-      <div
-        className="absolute top-0 left-0 bg-[#160000] rounded-full w-[0.5rem] h-[0.5rem]"
-        style={{
-          transform:
-            "translate3d(calc(var(--x) - 50%), calc(var(--y) - 50%), 0)",
-          willChange: "transform",
-        }}
-      />
+      {showCursor && (
+        <div
+          className="absolute top-0 left-0 bg-blue-500 rounded-full w-3 h-3 transform -translate-x-1/2 -translate-y-1/2 z-20 shadow-lg shadow-blue-500/50"
+          style={{
+            transform: "translate3d(calc(var(--x)), calc(var(--y)), 0)",
+            willChange: "transform",
+            transition: "transform 0.05s ease-out",
+          }}
+        />
+      )}
       <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
   );
 };
-
 export default Waves;

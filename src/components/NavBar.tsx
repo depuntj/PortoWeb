@@ -36,7 +36,7 @@ export default function NavBar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md shadow-sm py-3"
+          ? "bg-black/80 backdrop-blur-md shadow-lg py-3"
           : "bg-transparent py-5"
       }`}
     >
@@ -48,7 +48,7 @@ export default function NavBar() {
             <div className="h-8 w-8 mr-2 rounded-md bg-gradient-to-r from-blue-600 to-violet-600 flex items-center justify-center text-white">
               DD
             </div>
-            <span className="hidden sm:block">Dyan Dananjaya</span>
+            <span className="hidden sm:block text-white">Dyan Dananjaya</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -73,7 +73,7 @@ export default function NavBar() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-foreground/70 hover:bg-foreground/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-400 hover:bg-blue-900/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Open main menu"
           >
@@ -113,7 +113,7 @@ export default function NavBar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-background border-t border-foreground/10 mt-2 shadow-lg">
+        <div className="md:hidden bg-black/90 border-t border-blue-900/30 mt-2 shadow-lg backdrop-blur-md">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <MobileNavLink href="/" active={isActive("/")}>
               Home
@@ -149,8 +149,8 @@ function NavLink({ href, active, children }: NavLinkProps) {
       href={href}
       className={`inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors duration-200 ${
         active
-          ? "text-foreground border-b-2 border-blue-500"
-          : "text-foreground/70 hover:text-foreground border-b-2 border-transparent hover:border-foreground/30"
+          ? "text-white border-b-2 border-blue-500"
+          : "text-white/70 hover:text-white border-b-2 border-transparent hover:border-blue-400/50"
       }`}
     >
       {children}
@@ -164,8 +164,8 @@ function MobileNavLink({ href, active, children }: NavLinkProps) {
       href={href}
       className={`block px-3 py-2 rounded-md text-base font-medium ${
         active
-          ? "bg-foreground/10 text-foreground"
-          : "text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
+          ? "bg-blue-900/20 text-white"
+          : "text-white/70 hover:bg-blue-900/10 hover:text-white"
       }`}
     >
       {children}

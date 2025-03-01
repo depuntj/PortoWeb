@@ -1,14 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import Waves from "@/components/Animation/Waves";
 
 export default function HeroSection() {
   return (
-    <section className="relative pt-24 pb-12 md:pt-36 md:pb-24 overflow-hidden">
-      {/* Interactive Waves Background */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-blue-600/5 to-violet-600/5">
+    <section className="relative pt-24 pb-12 md:pt-36 md:pb-24 overflow-hidden min-h-[90vh] flex items-center">
+      {/* Enhanced Interactive Waves Background */}
+      <div className="absolute inset-0 z-0">
         <Waves
-          lineColor="#fff"
-          backgroundColor="rgba(255, 255, 255, 0.02)"
+          lineColor="rgba(255, 255, 255, 0.6)" // Increased opacity for more visible lines
+          backgroundColor="rgba(0, 0, 0, 0.85)" // Darker background for better contrast
           waveSpeedX={0.02}
           waveSpeedY={0.01}
           waveAmpX={40}
@@ -21,50 +23,70 @@ export default function HeroSection() {
         />
       </div>
 
+      {/* Subtle gradient overlay to improve text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent z-1"></div>
+
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="flex-1 space-y-6">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">
+            {/* Enhanced text visibility with text shadow and larger font */}
+            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight drop-shadow-lg">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-violet-500 leading-tight text-shadow-sm">
                 Hello, I&apos;m
               </span>
               <br />
-              <span className="mt-2 block">Dyan Dananjaya</span>
+              <span className="mt-2 block text-white text-6xl sm:text-7xl drop-shadow-lg">
+                Dyan Dananjaya
+              </span>
             </h1>
-            <h2 className="text-2xl text-foreground/90">
+
+            <h2 className="text-2xl sm:text-3xl text-white font-semibold drop-shadow-md">
               Full-Stack Developer
             </h2>
-            <p className="text-xl text-foreground/80 max-w-lg">
+
+            <p className="text-xl text-white leading-relaxed max-w-lg drop-shadow-md backdrop-blur-sm bg-black/10 p-4 rounded-lg">
               Innovative developer with a proven track record of enhancing user
               experiences through strategic development and analytics.
             </p>
+
             <div className="flex flex-wrap gap-4 pt-4">
               <Link
                 href="/projects"
-                className="bg-foreground text-background px-5 py-3 rounded-full font-medium hover:opacity-90 transition"
+                className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all duration-300"
               >
                 View Projects
               </Link>
               <Link
                 href="/contact"
-                className="border border-foreground/20 backdrop-blur-sm bg-background/10 px-5 py-3 rounded-full font-medium hover:bg-foreground/5 transition"
+                className="border-2 border-white bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full font-medium hover:bg-white/20 transition-all duration-300 text-white"
               >
                 Contact Me
               </Link>
             </div>
           </div>
-          <div className="relative w-60 h-60 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-foreground/10">
-            <div className="h-full w-full bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center text-white text-5xl font-bold">
-              DP
+
+          {/* Enhanced profile circle with border glow effect */}
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex-shrink-0">
+            {/* Outer glow effect */}
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 opacity-30 blur-md"></div>
+
+            {/* Main circle with border */}
+            <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
+              <div className="h-full w-full bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center text-white text-6xl font-bold">
+                DP
+              </div>
             </div>
+
+            {/* Pulsing effect */}
+            <div className="absolute -inset-4 rounded-full border-2 border-blue-500/30 animate-pulse"></div>
           </div>
         </div>
 
-        {/* Social Links */}
+        {/* Enhanced Social Links with better visibility */}
         <div className="flex gap-6 mt-12 justify-center md:justify-start">
           <a
             href="mailto:danan12453@gmail.com"
-            className="text-foreground/70 hover:text-foreground transition"
+            className="text-white hover:text-blue-400 transition-colors bg-black/30 p-3 rounded-full backdrop-blur-sm"
             aria-label="Email"
           >
             <svg
@@ -86,7 +108,7 @@ export default function HeroSection() {
             href="https://github.com/depuntj"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground/70 hover:text-foreground transition"
+            className="text-white hover:text-blue-400 transition-colors bg-black/30 p-3 rounded-full backdrop-blur-sm"
             aria-label="GitHub"
           >
             <svg
@@ -103,7 +125,7 @@ export default function HeroSection() {
             href="https://linkedin.com/in/danjaytj"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground/70 hover:text-foreground transition"
+            className="text-white hover:text-blue-400 transition-colors bg-black/30 p-3 rounded-full backdrop-blur-sm"
             aria-label="LinkedIn"
           >
             <svg
@@ -118,7 +140,7 @@ export default function HeroSection() {
           </a>
           <a
             href="tel:+6282232685588"
-            className="text-foreground/70 hover:text-foreground transition"
+            className="text-white hover:text-blue-400 transition-colors bg-black/30 p-3 rounded-full backdrop-blur-sm"
             aria-label="Phone"
           >
             <svg
@@ -138,6 +160,40 @@ export default function HeroSection() {
           </a>
         </div>
       </div>
+
+      {/* Add custom styles to support text shadows */}
+      <style jsx global>{`
+        .text-shadow-sm {
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .text-shadow-md {
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .text-shadow-lg {
+          text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        @keyframes pulse-ring {
+          0% {
+            transform: scale(0.95);
+            opacity: 0.5;
+          }
+          50% {
+            transform: scale(1);
+            opacity: 0.3;
+          }
+          100% {
+            transform: scale(0.95);
+            opacity: 0.5;
+          }
+        }
+
+        .animate-pulse-ring {
+          animation: pulse-ring 3s infinite;
+        }
+      `}</style>
     </section>
   );
 }
