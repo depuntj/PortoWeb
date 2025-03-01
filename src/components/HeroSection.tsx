@@ -18,8 +18,8 @@ export default function HeroSection() {
           friction={0.9}
           tension={0.01}
           maxCursorMove={120}
-          xGap={12}
-          yGap={36}
+          xGap={30}
+          yGap={40}
         />
       </div>
 
