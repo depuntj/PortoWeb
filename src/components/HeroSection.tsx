@@ -31,7 +31,7 @@ export default function HeroSection() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="flex-1 space-y-6">
-            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight drop-shadow-lg">
+            <p className="text-5xl sm:text-6xl font-bold tracking-tight drop-shadow-lg">
               <BlurText
                 text="Hello, I'm"
                 delay={100}
@@ -49,16 +49,16 @@ export default function HeroSection() {
                   onAnimationComplete={() => setTitleAnimationComplete(true)}
                 />
               </div>
-            </h1>
+            </p>
 
-            <h2 className="text-2xl sm:text-3xl text-white font-semibold drop-shadow-md">
+            <h1 className="text-2xl sm:text-3xl text-white font-semibold drop-shadow-md">
               <BlurText
-                text="Full-Stack Developer"
+                text="SoftwareDeveloper"
                 delay={100}
                 animateBy="words"
                 direction="bottom"
               />
-            </h2>
+            </h1>
 
             <p
               className={`text-xl text-white leading-relaxed max-w-lg drop-shadow-md backdrop-blur-sm bg-black/10 p-4 rounded-lg transition-opacity duration-700 ${
@@ -80,7 +80,6 @@ export default function HeroSection() {
             <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 opacity-30 blur-md"></div>
 
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
-              {/* Use a regular img tag instead of Next.js Image component to avoid build issues */}
               <Image
                 src="/Profile.png"
                 alt="Dyan Dananjaya"
