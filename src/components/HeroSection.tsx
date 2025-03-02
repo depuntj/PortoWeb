@@ -1,9 +1,13 @@
 "use client";
-
-import Link from "next/link";
+import Image from "next/image";
 import Waves from "@/components/Animation/Waves";
+import BlurText from "@/components/Animation/BlurText";
+import { useState } from "react";
 
 export default function HeroSection() {
+  const [nameAnimationComplete, setNameAnimationComplete] = useState(false);
+  const [titleAnimationComplete, setTitleAnimationComplete] = useState(false);
+
   return (
     <section className="relative pt-24 pb-12 md:pt-36 md:pb-24 overflow-hidden min-h-[90vh] flex items-center">
       <div className="absolute inset-0 z-0">
@@ -28,54 +32,76 @@ export default function HeroSection() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="flex-1 space-y-6">
             <h1 className="text-5xl sm:text-6xl font-bold tracking-tight drop-shadow-lg">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-violet-500 leading-tight text-shadow-sm">
-                Hello, I&apos;m
-              </span>
-              <br />
-              <span className="mt-2 block text-white text-6xl sm:text-7xl drop-shadow-lg">
-                Dyan Dananjaya
-              </span>
+              <BlurText
+                text="Hello, I'm"
+                delay={100}
+                animateBy="words"
+                direction="top"
+                className="text-blue-400 leading-tight text-shadow-sm"
+                onAnimationComplete={() => setNameAnimationComplete(true)}
+              />
+              <div className="mt-2 block text-white text-6xl sm:text-7xl drop-shadow-lg">
+                <BlurText
+                  text="Dyan Dananjaya"
+                  delay={150}
+                  animateBy="words"
+                  direction="top"
+                  onAnimationComplete={() => setTitleAnimationComplete(true)}
+                />
+              </div>
             </h1>
 
             <h2 className="text-2xl sm:text-3xl text-white font-semibold drop-shadow-md">
-              Full-Stack Developer
+              <BlurText
+                text="Full-Stack Developer"
+                delay={100}
+                animateBy="words"
+                direction="bottom"
+              />
             </h2>
 
-            <p className="text-xl text-white leading-relaxed max-w-lg drop-shadow-md backdrop-blur-sm bg-black/10 p-4 rounded-lg">
+            <p
+              className={`text-xl text-white leading-relaxed max-w-lg drop-shadow-md backdrop-blur-sm bg-black/10 p-4 rounded-lg transition-opacity duration-700 ${
+                titleAnimationComplete ? "opacity-100" : "opacity-0"
+              }`}
+            >
               Innovative developer with a proven track record of enhancing user
               experiences through strategic development and analytics.
             </p>
-
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Link
-                href="/projects"
-                className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all duration-300"
-              >
-                View Projects
-              </Link>
-              <Link
-                href="/contact"
-                className="border-2 border-white bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full font-medium hover:bg-white/20 transition-all duration-300 text-white"
-              >
-                Contact Me
-              </Link>
-            </div>
           </div>
 
-          <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex-shrink-0">
+          <div
+            className={`relative w-64 h-64 sm:w-80 sm:h-80 flex-shrink-0 transition-all duration-1000 transform ${
+              nameAnimationComplete
+                ? "translate-x-0 opacity-100"
+                : "translate-x-20 opacity-0"
+            }`}
+          >
             <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 opacity-30 blur-md"></div>
 
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
-              <div className="h-full w-full bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center text-white text-6xl font-bold">
-                DP
-              </div>
+              {/* Use a regular img tag instead of Next.js Image component to avoid build issues */}
+              <Image
+                src="/Profile.png"
+                alt="Dyan Dananjaya"
+                fill
+                style={{ objectFit: "cover" }}
+                className="object-cover"
+              />
             </div>
 
             <div className="absolute -inset-4 rounded-full border-2 border-blue-500/30 animate-pulse"></div>
           </div>
         </div>
 
-        <div className="flex gap-6 mt-12 justify-center md:justify-start">
+        <div
+          className={`flex gap-6 mt-12 justify-center md:justify-start transition-all duration-700 ${
+            titleAnimationComplete
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
+          }`}
+          style={{ transitionDelay: "800ms" }}
+        >
           <a
             href="mailto:danan12453@gmail.com"
             className="text-white hover:text-blue-400 transition-colors bg-black/30 p-3 rounded-full backdrop-blur-sm"
