@@ -8,14 +8,12 @@ export default function NavBar() {
   const [activeSection, setActiveSection] = useState("home");
   const [mounted, setMounted] = useState(false);
 
-  // Define the sections to monitor
   const sections = ["home", "about", "projects", "skills", "contact"];
 
-  // Check which section is currently in view
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkActiveSection = () => {
-    const scrollPosition = window.scrollY + 100; // Add offset for better UX
+    const scrollPosition = window.scrollY + 100;
 
-    // Check each section and update active state
     sections.forEach((sectionId) => {
       const section = document.getElementById(sectionId);
       if (section) {
@@ -32,45 +30,36 @@ export default function NavBar() {
     });
   };
 
-  // Handle component mounting animation
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Handle scroll events for navbar styling and section detection
   useEffect(() => {
     const handleScroll = () => {
-      // Check for navbar background change
       if (window.scrollY > 20) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
 
-      // Check which section is active
       checkActiveSection();
     };
 
     window.addEventListener("scroll", handleScroll);
-    // Initial check
     checkActiveSection();
 
-    // Cleanup
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [checkActiveSection]);
 
-  // Handle smooth scrolling to section
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      // Close mobile menu if open
       setIsMobileMenuOpen(false);
 
-      // Scroll to element with smooth behavior
       window.scrollTo({
-        top: element.offsetTop - 80, // Offset to account for navbar height
+        top: element.offsetTop - 80,
         behavior: "smooth",
       });
     }
@@ -86,7 +75,6 @@ export default function NavBar() {
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-center">
-          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             <NavLink
               label="Home"
@@ -120,7 +108,6 @@ export default function NavBar() {
             />
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             type="button"
             className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-400 hover:bg-blue-900/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
@@ -161,7 +148,6 @@ export default function NavBar() {
         </nav>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-black/95 border-t border-blue-500/20 mt-2 shadow-lg backdrop-blur-md rounded-b-2xl">
           <div className="px-4 pt-3 pb-4 space-y-2 sm:px-3">
@@ -209,7 +195,7 @@ type NavLinkProps = {
   onClick: () => void;
 };
 
-function NavLink({ label, sectionId, active, onClick }: NavLinkProps) {
+function NavLink({ label, active, onClick }: NavLinkProps) {
   return (
     <button
       onClick={onClick}
@@ -232,7 +218,7 @@ function NavLink({ label, sectionId, active, onClick }: NavLinkProps) {
   );
 }
 
-function MobileNavLink({ label, sectionId, active, onClick }: NavLinkProps) {
+function MobileNavLink({ label, active, onClick }: NavLinkProps) {
   return (
     <button
       onClick={onClick}
