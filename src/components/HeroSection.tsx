@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Waves from "@/components/Animation/Waves";
 import BlurText from "@/components/Animation/BlurText";
+import GradientText from "@/components/Animation/GradientText";
 import { useState } from "react";
 
 export default function HeroSection() {
@@ -31,45 +32,76 @@ export default function HeroSection() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="flex-1 space-y-6">
-            <p className="text-5xl sm:text-6xl font-bold tracking-tight drop-shadow-lg">
-              <BlurText
-                text="Hello, I'm"
-                delay={100}
-                animateBy="words"
-                direction="top"
-                className="text-blue-400 leading-tight text-shadow-sm"
-                onAnimationComplete={() => setNameAnimationComplete(true)}
-              />
-              <div className="mt-2 block text-white text-6xl sm:text-7xl drop-shadow-lg">
+            <div className="flex flex-wrap items-center gap-x-3 text-xl sm:text-2xl font-bold">
+              <div className="flex flex-wrap items-center gap-x-3">
                 <BlurText
-                  text="Dyan Dananjaya"
-                  delay={150}
+                  text="Hello, I'm"
+                  delay={100}
                   animateBy="words"
                   direction="top"
-                  onAnimationComplete={() => setTitleAnimationComplete(true)}
+                  className="text-purple-600 text-shadow-sm"
                 />
+                <div className="relative">
+                  <div
+                    className={`transition-opacity duration-500 ${
+                      nameAnimationComplete ? "opacity-0" : "opacity-100"
+                    }`}
+                  >
+                    <BlurText
+                      text="Dyan Dananjaya"
+                      delay={100}
+                      animateBy="words"
+                      direction="top"
+                      onAnimationComplete={() => setNameAnimationComplete(true)}
+                      className="text-transparent"
+                    />
+                  </div>
+                  <div
+                    className={`absolute inset-0 transition-opacity duration-300 ${
+                      nameAnimationComplete ? "opacity-100" : "opacity-0"
+                    }`}
+                    style={{ transitionDelay: "300ms" }}
+                  >
+                    <GradientText
+                      colors={[
+                        "#ffffff",
+                        "#a855f7",
+                        "#ffffff",
+                        "#a855f7",
+                        "#ffffff",
+                      ]}
+                      animationSpeed={3}
+                      showBorder={false}
+                      className="font-bold"
+                    >
+                      Dyan Dananjaya
+                    </GradientText>
+                  </div>
+                </div>
               </div>
-            </p>
-
-            <h1 className="text-2xl sm:text-3xl text-white font-semibold drop-shadow-md">
+            </div>
+            <h1 className="text-4xl sm:text-6xl text-white font-semibold drop-shadow-md mb-6">
               <BlurText
-                text="SoftwareDeveloper"
-                delay={100}
+                text="Software Developer"
+                delay={300}
                 animateBy="words"
-                direction="bottom"
+                direction="top"
+                onAnimationComplete={() => setTitleAnimationComplete(true)}
               />
             </h1>
-
-            <p
-              className={`text-xl text-white leading-relaxed max-w-lg drop-shadow-md backdrop-blur-sm bg-black/10 p-4 rounded-lg transition-opacity duration-700 ${
+            <div
+              className={`transition-opacity duration-700 ${
                 titleAnimationComplete ? "opacity-100" : "opacity-0"
               }`}
+              style={{ transitionDelay: "600ms" }}
             >
-              Innovative developer with a proven track record of enhancing user
-              experiences through strategic development and analytics.
-            </p>
+              <p className="text-xl text-white leading-relaxed max-w-lg drop-shadow-md backdrop-blur-sm bg-black/10 p-4 rounded-lg">
+                Passionate about crafting digital experiences that connect with
+                people. I blend creativity with code to build solutions that
+                make a difference, one pixel and function at a time.
+              </p>
+            </div>
           </div>
-
           <div
             className={`relative w-64 h-64 sm:w-80 sm:h-80 flex-shrink-0 transition-all duration-1000 transform ${
               nameAnimationComplete
@@ -92,7 +124,6 @@ export default function HeroSection() {
             <div className="absolute -inset-4 rounded-full border-2 border-blue-500/30 animate-pulse"></div>
           </div>
         </div>
-
         <div
           className={`flex gap-6 mt-12 justify-center md:justify-start transition-all duration-700 ${
             titleAnimationComplete
@@ -189,6 +220,22 @@ export default function HeroSection() {
 
         .text-shadow-lg {
           text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .animate-gradient {
+          animation: gradient linear infinite;
         }
 
         @keyframes pulse-ring {

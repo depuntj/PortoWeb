@@ -23,6 +23,7 @@ module.exports = {
       },
       animation: {
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        gradient: "gradient 8s linear infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -37,6 +38,13 @@ module.exports = {
         md: "0 2px 4px rgba(0, 0, 0, 0.4)",
         lg: "0 4px 8px rgba(0, 0, 0, 0.6)",
         glow: "0 0 8px rgba(59, 130, 246, 0.5)",
+      },
+      keyframes: {
+        gradient: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
       },
     },
   },
