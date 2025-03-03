@@ -12,6 +12,7 @@
     "@react-three/drei": "^10.0.3",
     "@react-three/fiber": "^9.0.4",
     "@react-three/rapier": "^1.5.0",
+    "framer-motion": "^12.4.10",
     "meshline": "^3.3.1",
     "next": "15.2.0",
     "react": "^19.0.0",
