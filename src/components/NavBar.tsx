@@ -8,7 +8,7 @@ export default function NavBar() {
   const [activeSection, setActiveSection] = useState("home");
   const [mounted, setMounted] = useState(false);
 
-  const sections = ["home", "about", "projects", "skills", "contact"];
+  const sections = ["home", "about", "projects", "contact"];
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkActiveSection = () => {
@@ -93,12 +93,6 @@ export default function NavBar() {
               sectionId="projects"
               active={activeSection === "projects"}
               onClick={() => scrollToSection("projects")}
-            />
-            <NavLink
-              label="Skills"
-              sectionId="skills"
-              active={activeSection === "skills"}
-              onClick={() => scrollToSection("skills")}
             />
             <NavLink
               label="Contact"
